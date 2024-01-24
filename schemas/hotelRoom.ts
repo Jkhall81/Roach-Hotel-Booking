@@ -24,8 +24,7 @@ const hotelRoom = {
       options: {
         source: "name",
       },
-      validation: (Rule) =>
-        Rule.required().max(50).error("Maximum 50 Characters"),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
