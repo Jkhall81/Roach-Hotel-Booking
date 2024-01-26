@@ -14,6 +14,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "plus.unsplash.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "encrypted-tbn0.gstatic.com",
         port: "",
       },

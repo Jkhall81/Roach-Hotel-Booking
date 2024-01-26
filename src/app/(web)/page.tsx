@@ -7,13 +7,12 @@ import { getFeaturedRoom } from "@/libs/apis";
 
 const Home = async () => {
   const featuredRoom = await getFeaturedRoom();
-  console.log(featuredRoom);
 
   return (
     <>
       <HeroSection />
       <PageSearch />
-      <FeaturedRoom />
+      <FeaturedRoom featuredRoom={featuredRoom} />
       <Gallery />
       <NewsLetter />
     </>
