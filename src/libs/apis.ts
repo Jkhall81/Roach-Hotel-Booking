@@ -21,5 +21,10 @@ export async function getRooms() {
 }
 
 export async function getRoom(slug: string) {
-  const reuslt = await sanityClient.fetch<Room>(queries.getRoom, { slug });
+  const result = await sanityClient.fetch<Room>(
+    queries.getRoom,
+    { slug },
+    { cache: "no-cache" }
+  );
+  return result;
 }
