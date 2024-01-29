@@ -25,7 +25,7 @@ export type Room = {
   dimension: string;
   discount: number;
   images: Image[];
-  isbooked: boolean;
+  isBooked: boolean;
   isFeatured: boolean;
   name: string;
   numberOfBeds: number;
@@ -34,4 +34,16 @@ export type Room = {
   slug: Slug;
   specialNote: string;
   type: string;
+};
+
+export type CreateBookingDto = {
+  user: string;
+  hotelRoom: string;
+  checkinDate: string;
+  checkoutDate: string;
+  numberOfDays: number;
+  adults: number;
+  kids: number;
+  totalPrice: number;
+  discount: number;
 };
