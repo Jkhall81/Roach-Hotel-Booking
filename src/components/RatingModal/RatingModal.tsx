@@ -3,7 +3,7 @@ import { BsStarFill } from "react-icons/bs";
 
 type Props = {
   isOpen: boolean;
-  ratingValue: number;
+  ratingValue: number | null;
   setRatingValue: Dispatch<SetStateAction<number | null>>;
   ratingText: string;
   setRatingText: Dispatch<SetStateAction<string>>;
