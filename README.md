@@ -16,6 +16,7 @@ password: password123
 - [Backend](#backend)
 - [Deployment](#deployment)
 - [Testing](#testing)
+- [Bugs](#bugs)
 - [License](#license)
 
 ## Features
@@ -53,6 +54,10 @@ The front end is deployed on a free Vercel account. The Backend is Sanity which 
 ## Testing
 
 Work in progress.
+
+## Bugs
+
+Using the Google or Github Oauth login feature currently logins in the user registered with Sanity.
 
 ## License
 
