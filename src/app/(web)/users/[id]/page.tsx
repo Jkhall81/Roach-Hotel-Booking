@@ -13,6 +13,9 @@ import { BsJournalBookmarkFill } from "react-icons/bs";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import Table from "@/components/Table/Table";
 import Chart from "@/components/Chart/Chart";
+import RatingModal from "@/components/RatingModal/RatingModal";
+import BackDrop from "@/components/BackDrop/BackDrop";
+import toast from "react-hot-toast";
 
 const UserDetails = (props: { params: { id: string } }) => {
   const {
@@ -24,6 +27,40 @@ const UserDetails = (props: { params: { id: string } }) => {
   >("bookings");
 
   const [roomId, setRoomId] = useState<string | null>(null);
+  const [isRatingVisible, SetIsRatingVisible] = useState(false);
+  const [isSubmittingReview, SetIsSubmittingReview] = useState(false);
+  const [ratingValue, setRatingValue] = useState<number | null>(0);
+  const [ratingText, setRatingText] = useState("");
+
+  const toggleRatingModal = () => SetIsRatingVisible((prevState) => !prevState);
+
+  const reviewSubmitHandler = async () => {
+    if (!ratingText.trim().length || !ratingValue) {
+      return toast.error("Please provide rating and review.");
+    }
+    if (!roomId) {
+      return toast.error("Room Id not provided.");
+    }
+    SetIsSubmittingReview(true);
+    try {
+      const { data } = await axios.post("/api/users", {
+        reviewText: ratingText,
+        ratingValue,
+        roomId,
+      });
+      console.log(data);
+      toast.success("Review Submitted");
+    } catch (error) {
+      console.error(error);
+      toast.error("Review Failed to Upload");
+    } finally {
+      setRatingText("");
+      setRatingValue(null);
+      setRoomId(null);
+      SetIsSubmittingReview(false);
+      SetIsRatingVisible(false);
+    }
+  };
 
   const fetchUserBooking = async () => getUserBookings(userId);
   const fetchUserData = async () => {
@@ -56,7 +93,7 @@ const UserDetails = (props: { params: { id: string } }) => {
     <div className="container mx-auto px-2 md:px-4 py-10">
       <div className="grid md:grid-cols-12 gap-10">
         <div className="hidden md:block md:col-span-4 lg:col-span-3 shadow-lg h-fit sticky top-10 bg-[#eff0f2] text-black rounded-lg px-6 py-4">
-          <div className="md:w-[143px] w-38 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden">
+          <div className="md:w-[143px] w-28 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden">
             <Image
               src={userData.image}
               alt={userData.name}
@@ -141,7 +178,11 @@ const UserDetails = (props: { params: { id: string } }) => {
           </nav>
           {currentNav === "bookings" ? (
             userBookings && (
-              <Table bookingsDetails={userBookings} setRoomId={setRoomId} />
+              <Table
+                bookingsDetails={userBookings}
+                setRoomId={setRoomId}
+                toggleRatingModal={toggleRatingModal}
+              />
             )
           ) : (
             <></>
@@ -154,6 +195,17 @@ const UserDetails = (props: { params: { id: string } }) => {
           )}
         </div>
       </div>
+      <RatingModal
+        ratingValue={ratingValue}
+        setRatingValue={setRatingValue}
+        isOpen={isRatingVisible}
+        ratingText={ratingText}
+        setRatingText={setRatingText}
+        isSubmittingReview={isSubmittingReview}
+        reviewSubmitHandler={reviewSubmitHandler}
+        toggleRatingModal={toggleRatingModal}
+      />
+      <BackDrop isOpen={isRatingVisible} />
     </div>
   );
 };

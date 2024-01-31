@@ -7,9 +7,14 @@ import { Dispatch, FC, SetStateAction } from "react";
 type Props = {
   bookingsDetails: Booking[];
   setRoomId: Dispatch<SetStateAction<string | null>>;
+  toggleRatingModal: () => void;
 };
 
-const Table: FC<Props> = ({ bookingsDetails, setRoomId }) => {
+const Table: FC<Props> = ({
+  bookingsDetails,
+  setRoomId,
+  toggleRatingModal,
+}) => {
   const router = useRouter();
   return (
     <div className="overflow-x-auto max-w-[340px] rounded-lg mx-auto md:max-w-full shadow-md sm:rounded-lg">
@@ -48,6 +53,7 @@ const Table: FC<Props> = ({ bookingsDetails, setRoomId }) => {
                 <button
                   onClick={() => {
                     setRoomId(booking.hotelRoom._id);
+                    toggleRatingModal();
                   }}
                   className="font-medium text-blue-600 hover:underline"
                 >
