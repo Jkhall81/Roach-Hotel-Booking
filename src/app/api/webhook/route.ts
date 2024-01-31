@@ -27,8 +27,8 @@ export async function POST(req: Request, res: Response) {
     case checkout_session_completed:
       const session = event.data.object;
 
-      // @ts-nocheck
       const {
+        // @ts-ignore
         metadata: {
           adults,
           checkinDate,
@@ -41,7 +41,6 @@ export async function POST(req: Request, res: Response) {
           totalPrice,
         },
       } = session;
-      // @ts-check
 
       await createBooking({
         adults: Number(adults),
