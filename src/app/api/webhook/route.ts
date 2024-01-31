@@ -28,6 +28,7 @@ export async function POST(req: Request, res: Response) {
       const session = event.data.object;
 
       const {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         metadata: {
           adults,
