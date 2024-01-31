@@ -21,7 +21,7 @@ password: password123
 
 ## Features
 
-This site has stripe payment functionality built in. Stripe is currently in test mode on the project, obviously. Next Auth is used to handle user authentication. The project is made using Next.js and Sanity. Content, new hotel rooms, can be added via the Sanity Studio CMS system, which has been integrated into the project and can be accessed via the /studio route. Users can view available hotel rooms, book a hotel room, pay via stripe, leave a review / rating of a hotel room, and view their own booking history.
+This site has stripe payment functionality built in. Stripe is currently in test mode on the project, obviously. Next Auth is used to handle user authentication. The project is made using Next.js and Sanity. Content, new hotel rooms, can be added via the Sanity Studio CMS system, which has been integrated into the project and can be accessed via the /studio route. Users can view available hotel rooms, book a hotel room, pay via stripe, leave a review / rating of a hotel room, and view their own booking history. The site has light and dark mode which can be toggled via button in the header.
 
 ## Technologies
 
